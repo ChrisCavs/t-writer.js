@@ -46,7 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const defaultOptions = {
-    loop: false
+    loop: false,
+    animateCursor: true,
+    typeSpeed: 
   }
 
   class Typewriter {
@@ -75,7 +77,9 @@ document.addEventListener('DOMContentLoaded', () => {
       while (this.text.length > 0) {
         if (!this.timeout) {
           this.deleteChar()
-          this.timeout = setTimeout(, this.options.)
+          this.timeout = setTimeout(() => {
+            this.timeout = null
+          }, (1000 / this.options.typeSpeed))
         }
       }
     }
