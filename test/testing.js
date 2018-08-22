@@ -65,6 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
       this.createTextEl()
     }
 
+    // API
+
     type (str) {
       this.queue.push({
         type: 'type',
@@ -105,15 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
       this.loop(0)
     }
 
-    deleteChar () {
-      this.text = this.text.slice(0, -1)
-      this.render()
-    }
-
-    addChar (char) {
-      this.text += char
-      this.render()
-    }
+    // ACTIONS
 
     add (content) {
       let count = 0
@@ -172,6 +166,18 @@ document.addEventListener('DOMContentLoaded', () => {
       return new Promise ((resolve, _) => {
         setTimeout(resolve, time)
       })
+    }
+
+    // HELPERS
+
+    deleteChar() {
+      this.text = this.text.slice(0, -1)
+      this.render()
+    }
+
+    addChar(char) {
+      this.text += char
+      this.render()
     }
 
     step (idx) {
