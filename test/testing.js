@@ -45,12 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  example queue element:
-  {
-    type: 'delete',
-
-  }
-
   const defaultOptions = {
     loop: false
   }
@@ -61,6 +55,29 @@ document.addEventListener('DOMContentLoaded', () => {
       this.text = ''
       this.queue = []
       this.options = Object.assign(defaultOptions, options)
+
+      this.createTextEl()
+    }
+
+    deleteChar () {
+
+    }
+
+    type (action) {
+
+    }
+
+    delete (action) {
+
+    }
+
+    deleteAll () {
+      while (this.text.length > 0) {
+        if (!this.timeout) {
+          this.deleteChar()
+          this.timeout = setTimeout(, this.options.)
+        }
+      }
     }
 
     step (idx) {
@@ -73,19 +90,13 @@ document.addEventListener('DOMContentLoaded', () => {
         case 'deleteChars':
           return this.delete(action)
           
-        case 'deleteAll':
+        case 'clear':
           return this.deleteAll()
       }
     }
 
     start () {
-      const cursorEl = document.createElement('span')
-
-      this.el.appendChild(cursorEl)
-
-      this.cursor = new Cursor(cursorEl)
-      this.cursor.start()
-
+      this.createCursorEl()
       this.startLoop()
     }
 
@@ -98,6 +109,30 @@ document.addEventListener('DOMContentLoaded', () => {
         this.deleteAll()
         this.startLoop()
       }
+    }
+
+    createCursorEl () {
+      const cursorEl = document.createElement('span')
+      const cursorText = document.createTextNode('|')
+      cursorEl.appendChild(cursorText)
+
+      this.el.appendChild(cursorEl)
+
+      if (this.options.animateCursor) {
+        this.cursor = new Cursor(cursorEl)
+        this.cursor.start()
+      }
+    }
+
+    createTextEl () {
+      const textEl = document.createElement('span')
+      this.el.appendChild(textEl)
+
+      this.textEl = textEl
+    }
+
+    render () {
+      this.textEl.innerHTML = this.text
     }
   }
 })
