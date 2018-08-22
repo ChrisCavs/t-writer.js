@@ -106,6 +106,15 @@ document.addEventListener('DOMContentLoaded', () => {
       this.options = Object.assign(this.options, options)
     }
 
+    then (cb) {
+      this.queue.push({
+        type: 'callback',
+        cb
+      })
+
+      return this
+    }
+
     start() {
       this.createCursorEl()
       this.loop(0)
@@ -168,6 +177,13 @@ document.addEventListener('DOMContentLoaded', () => {
       })
     }
 
+    callback (cb) {
+      return new Promise ((resolve, _) => {
+        cb()
+        resolve()
+      })
+    }
+
     // HELPERS
 
     deleteChar() {
@@ -195,6 +211,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         case 'pause':
           return this.pause(action.time)
+
+        case 'callback':
+          return this.callback(action.cb)
       }
     }
 
