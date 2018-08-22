@@ -48,7 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const defaultOptions = {
     loop: false,
     animateCursor: true,
-    typeSpeed: 
+    typeSpeed: 5,
+    deleteSpeed: 5
   }
 
   class Typewriter {
@@ -61,25 +62,83 @@ document.addEventListener('DOMContentLoaded', () => {
       this.createTextEl()
     }
 
-    deleteChar () {
+    type (str) {
+      this.queue.push({
+        type: 'type',
+        content: str
+      })
 
+      return this
     }
 
-    type (action) {
+    deleteChars (num) {
+      this.queue.push({
+        type: 'deleteChars',
+        count: num
+      })
+    }
 
+    clear () {
+      this.queue.push({
+        type: 'clear'
+      })
+
+      return this
+    }
+
+    start() {
+      this.createCursorEl()
+      this.startLoop()
+    }
+
+    deleteChar () {
+      this.text = this.text.slice(0, -1)
+      this.render()
+    }
+
+    addChar (char) {
+      this.text += char
+      this.render()
+    }
+
+    add (action) {
+      let count = 0
+
+      while (count < action.content.length) {
+        if (!this.timeout) {
+          this.addChar(action.content[count])
+          count++
+
+          this.timeout = setTimeout(() => {
+            this.timeout = null
+          }, (1000 / this.options.typeSpeed))
+        }
+      }
     }
 
     delete (action) {
+      let count = action.count
 
+      while (count > 0) {
+        if (!this.timeout) {
+          this.deleteChar()
+          count--
+
+          this.timeout = setTimeout(() => {
+            this.timeout = null
+          }, (1000 / this.options.deleteSpeed))
+        }
+      }
     }
 
     deleteAll () {
       while (this.text.length > 0) {
         if (!this.timeout) {
           this.deleteChar()
+
           this.timeout = setTimeout(() => {
             this.timeout = null
-          }, (1000 / this.options.typeSpeed))
+          }, (1000 / this.options.deleteSpeed))
         }
       }
     }
@@ -99,11 +158,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    start () {
-      this.createCursorEl()
-      this.startLoop()
-    }
-
     startLoop () {
       for (let idx = 0; idx < this.queue.length; idx++) {
         this.step(idx)
@@ -117,8 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     createCursorEl () {
       const cursorEl = document.createElement('span')
-      const cursorText = document.createTextNode('|')
-      cursorEl.appendChild(cursorText)
+      cursorEl.innerHTML = '|'
 
       this.el.appendChild(cursorEl)
 
@@ -139,4 +192,6 @@ document.addEventListener('DOMContentLoaded', () => {
       this.textEl.innerHTML = this.text
     }
   }
+
+  const test = document.querySelector('.test')
 })
