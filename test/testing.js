@@ -102,6 +102,10 @@ document.addEventListener('DOMContentLoaded', () => {
       return this
     }
 
+    changeOptions (options) {
+      this.options = Object.assign(this.options, options)
+    }
+
     start() {
       this.createCursorEl()
       this.loop(0)
@@ -116,9 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return new Promise((resolve, _) => {
 
         const _step = () => {
-          if (count === content.length) {
-            return resolve()
-          }
+          if (count === content.length) return resolve()
 
           const newStamp = Date.now()
 
@@ -140,9 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return new Promise((resolve, _) => {
 
         const _step = () => {
-          if (count === 0) {
-            return resolve()
-          }
+          if (count === 0) return resolve()
 
           const newStamp = Date.now()
 
