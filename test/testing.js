@@ -7,12 +7,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
       this.initialAssignment()
       this.el.addEventListener('transitionend', this.logic.bind(this))
+
+      this.fade = this.fade.bind(this)
+      this.fadeIn = this.fadeIn.bind(this)
     }
 
     initialAssignment () {
       Object.assign(this.el.style, {
         opacity: '1',
-        'transition-duration': '0.3s'
+        'transition-duration': '0.1s'
       })
     }
 
@@ -36,8 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     logic () {
       this.faded
-        ? this.fadeIn()
-        : this.fade()
+        ? setTimeout(this.fadeIn, 400)
+        : setTimeout(this.fade, 400)
     }
 
     start () {
@@ -48,8 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const defaultOptions = {
     loop: false,
     animateCursor: true,
-    typeSpeed: 100,
-    deleteSpeed: 100
+    typeSpeed: 150,
+    deleteSpeed: 150
   }
 
   class Typewriter {
@@ -88,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     start() {
       this.createCursorEl()
-      this.startLoop()
+      this.loop(0)
     }
 
     deleteChar () {
@@ -105,19 +108,25 @@ document.addEventListener('DOMContentLoaded', () => {
       let count = 0
       this.timestamp = Date.now()
 
-      const step = () => {
-        if (count === action.content.length) return
-        const newStamp = Date.now()
+      return new Promise((resolve, _) => {
 
-        if (newStamp - this.timestamp >= this.options.typeSpeed) {
-          this.addChar(action.content[count])
-          this.timestamp = newStamp
-          count++
+        const step = () => {
+          if (count === action.content.length) {
+            resolve()
+          }
+          
+          const newStamp = Date.now()
+
+          if (newStamp - this.timestamp >= this.options.typeSpeed) {
+            this.addChar(action.content[count])
+            this.timestamp = newStamp
+            count++
+          }
+          requestAnimationFrame(step)
         }
-        requestAnimationFrame(step)
-      }
 
-      requestAnimationFrame(step)
+        requestAnimationFrame(step)
+      })
     }
 
     delete (action) {
@@ -136,24 +145,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     deleteAll () {
-      while (this.text.length > 0) {
-        if (!this.timeout) {
-          this.deleteChar()
+      this.timestamp = Date.now()
 
-          this.timeout = setTimeout(() => {
-            this.timeout = null
-          }, (1000 / this.options.deleteSpeed))
+      const step = () => {
+        if (this.text === '') return
+        const newStamp = Date.now()
+
+        if (newStamp - this.timestamp >= this.options.deleteSpeed) {
+          this.deleteChar()
+          this.timestamp = newStamp
         }
+        requestAnimationFrame(step)
       }
+
+      requestAnimationFrame(step)
     }
 
     step (idx) {
-      console.log(idx)
       const action = this.queue[idx]
 
       switch (action.type) {
         case 'type':
-          console.log('type action')
           return this.add(action)
 
         case 'deleteChars':
@@ -164,16 +176,17 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    startLoop () {
-      for (let idx = 0; idx < this.queue.length; idx++) {
-        console.log('in loop')
-        this.step(idx)
+    loop (idx) {
+      if (idx === this.queue.length) {
+        if (this.options.loop) {
+          this.deleteAll().then(_ => this.start())
+        }
       }
-      console.log('out of loop')
-      if (this.options.loop) {
-        this.deleteAll()
-        this.startLoop()
-      }
+
+      this.step(idx).then(_ => {
+        idx++
+        this.loop(idx + 1)
+      })
     }
 
     createCursorEl () {
@@ -197,7 +210,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     render () {
       this.textEl.innerHTML = this.text
-      console.log(this.textEl.innerHTML)
     }
   }
 
