@@ -91,6 +91,15 @@ document.addEventListener('DOMContentLoaded', () => {
       return this
     }
 
+    rest (time) {
+      this.queue.push({
+        type: 'pause',
+        time
+      })
+
+      return this
+    }
+
     start() {
       this.createCursorEl()
       this.loop(0)
@@ -112,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       return new Promise((resolve, _) => {
 
-        const step = () => {
+        const _step = () => {
           if (count === content.length) {
             return resolve()
           }
@@ -124,10 +133,10 @@ document.addEventListener('DOMContentLoaded', () => {
             this.timestamp = newStamp
             count++
           }
-          requestAnimationFrame(step)
+          requestAnimationFrame(_step)
         }
 
-        requestAnimationFrame(step)
+        requestAnimationFrame(_step)
       })
     }
 
@@ -136,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       return new Promise((resolve, _) => {
 
-        const step = () => {
+        const _step = () => {
           if (count === 0) {
             return resolve()
           }
@@ -148,15 +157,21 @@ document.addEventListener('DOMContentLoaded', () => {
             this.timestamp = newStamp
             count--
           }
-          requestAnimationFrame(step)
+          requestAnimationFrame(_step)
         }
 
-        requestAnimationFrame(step)
+        requestAnimationFrame(_step)
       })
     }
 
     deleteAll () {
       return this.delete(this.text.length)
+    }
+
+    pause (time) {
+      return new Promise ((resolve, _) => {
+        setTimeout(resolve, time)
+      })
     }
 
     step (idx) {
@@ -171,6 +186,9 @@ document.addEventListener('DOMContentLoaded', () => {
           
         case 'clear':
           return this.deleteAll()
+
+        case 'pause':
+          return this.pause(action.time)
       }
     }
 

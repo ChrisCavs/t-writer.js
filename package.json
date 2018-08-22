@@ -1,8 +1,8 @@
 {
-  "name": "headsup.js",
-  "version": "1.0.2",
-  "description": "Sticky headers that hide on scroll.",
-  "main": "dist/headsup.js",
+  "name": "type-right.js",
+  "version": "1.0.0",
+  "description": "Native typewriter effect, without compromises.",
+  "main": "dist/type-right.js",
   "license": "MIT",
   "scripts": {
     "build": "rollup -c",
