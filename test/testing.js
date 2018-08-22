@@ -48,8 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const defaultOptions = {
     loop: false,
     animateCursor: true,
-    typeSpeed: 5,
-    deleteSpeed: 5
+    typeSpeed: 100,
+    deleteSpeed: 100
   }
 
   class Typewriter {
@@ -103,17 +103,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     add (action) {
       let count = 0
+      this.timestamp = Date.now()
 
-      while (count < action.content.length) {
-        if (!this.timeout) {
+      const step = () => {
+        if (count === action.content.length) return
+        const newStamp = Date.now()
+
+        if (newStamp - this.timestamp >= this.options.typeSpeed) {
           this.addChar(action.content[count])
+          this.timestamp = newStamp
           count++
-
-          this.timeout = setTimeout(() => {
-            this.timeout = null
-          }, (1000 / this.options.typeSpeed))
         }
+        requestAnimationFrame(step)
       }
+
+      requestAnimationFrame(step)
     }
 
     delete (action) {
@@ -144,10 +148,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     step (idx) {
+      console.log(idx)
       const action = this.queue[idx]
 
       switch (action.type) {
         case 'type':
+          console.log('type action')
           return this.add(action)
 
         case 'deleteChars':
@@ -160,9 +166,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     startLoop () {
       for (let idx = 0; idx < this.queue.length; idx++) {
+        console.log('in loop')
         this.step(idx)
       }
-
+      console.log('out of loop')
       if (this.options.loop) {
         this.deleteAll()
         this.startLoop()
@@ -172,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
     createCursorEl () {
       const cursorEl = document.createElement('span')
       cursorEl.innerHTML = '|'
-
+      
       this.el.appendChild(cursorEl)
 
       if (this.options.animateCursor) {
@@ -190,8 +197,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     render () {
       this.textEl.innerHTML = this.text
+      console.log(this.textEl.innerHTML)
     }
   }
 
   const test = document.querySelector('.test')
+  const typeWriter = new Typewriter(test)
+
+  window.typewriter = typeWriter
 })
