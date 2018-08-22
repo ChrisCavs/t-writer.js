@@ -58,17 +58,18 @@ document.addEventListener('DOMContentLoaded', () => {
   class Typewriter {
     constructor (el, options) {
       this.el = el
+      this.text = ''
       this.queue = []
       this.options = Object.assign(defaultOptions, options)
     }
 
-    step () {
-      const action = this.queue.shift()
+    step (idx) {
+      const action = this.queue[idx]
 
       switch (action.type) {
         case 'type':
           return this.add(action)
-          
+
         case 'deleteChars':
           return this.delete(action)
           
@@ -85,8 +86,17 @@ document.addEventListener('DOMContentLoaded', () => {
       this.cursor = new Cursor(cursorEl)
       this.cursor.start()
 
-      while (this.queue.length > 0) {
-        this.step()
+      this.startLoop()
+    }
+
+    startLoop () {
+      for (let idx = 0; idx < this.queue.length; idx++) {
+        this.step(idx)
+      }
+
+      if (this.options.loop) {
+        this.deleteAll()
+        this.startLoop()
       }
     }
   }
