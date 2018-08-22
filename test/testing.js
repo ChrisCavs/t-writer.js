@@ -79,6 +79,8 @@ document.addEventListener('DOMContentLoaded', () => {
         type: 'deleteChars',
         count: num
       })
+
+      return this
     }
 
     clear () {
@@ -104,21 +106,21 @@ document.addEventListener('DOMContentLoaded', () => {
       this.render()
     }
 
-    add (action) {
+    add (content) {
       let count = 0
       this.timestamp = Date.now()
 
       return new Promise((resolve, _) => {
 
         const step = () => {
-          if (count === action.content.length) {
-            resolve()
+          if (count === content.length) {
+            return resolve()
           }
-          
+
           const newStamp = Date.now()
 
           if (newStamp - this.timestamp >= this.options.typeSpeed) {
-            this.addChar(action.content[count])
+            this.addChar(content[count])
             this.timestamp = newStamp
             count++
           }
@@ -129,36 +131,32 @@ document.addEventListener('DOMContentLoaded', () => {
       })
     }
 
-    delete (action) {
-      let count = action.count
+    delete (count) {
+      this.timestamp = Date.now()
 
-      while (count > 0) {
-        if (!this.timeout) {
-          this.deleteChar()
-          count--
+      return new Promise((resolve, _) => {
 
-          this.timeout = setTimeout(() => {
-            this.timeout = null
-          }, (1000 / this.options.deleteSpeed))
+        const step = () => {
+          if (count === 0) {
+            return resolve()
+          }
+
+          const newStamp = Date.now()
+
+          if (newStamp - this.timestamp >= this.options.deleteSpeed) {
+            this.deleteChar()
+            this.timestamp = newStamp
+            count--
+          }
+          requestAnimationFrame(step)
         }
-      }
+
+        requestAnimationFrame(step)
+      })
     }
 
     deleteAll () {
-      this.timestamp = Date.now()
-
-      const step = () => {
-        if (this.text === '') return
-        const newStamp = Date.now()
-
-        if (newStamp - this.timestamp >= this.options.deleteSpeed) {
-          this.deleteChar()
-          this.timestamp = newStamp
-        }
-        requestAnimationFrame(step)
-      }
-
-      requestAnimationFrame(step)
+      return this.delete(this.text.length)
     }
 
     step (idx) {
@@ -166,10 +164,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       switch (action.type) {
         case 'type':
-          return this.add(action)
+          return this.add(action.content)
 
         case 'deleteChars':
-          return this.delete(action)
+          return this.delete(action.count)
           
         case 'clear':
           return this.deleteAll()
@@ -179,12 +177,13 @@ document.addEventListener('DOMContentLoaded', () => {
     loop (idx) {
       if (idx === this.queue.length) {
         if (this.options.loop) {
-          this.deleteAll().then(_ => this.start())
+          this.deleteAll().then(_ => this.loop(0))
         }
+
+        return
       }
 
       this.step(idx).then(_ => {
-        idx++
         this.loop(idx + 1)
       })
     }
@@ -210,11 +209,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     render () {
       this.textEl.innerHTML = this.text
+      console.log(this.text)
     }
   }
 
   const test = document.querySelector('.test')
-  const typeWriter = new Typewriter(test)
+  const typeWriter = new Typewriter(test, {loop: true})
 
   window.typewriter = typeWriter
 })
