@@ -1,8 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   class Cursor {
-    constructor (el) {
+    constructor (el, speed) {
       this.el = el
+      this.speed = speed
+
       this.faded = false
 
       this.initialAssignment()
@@ -15,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initialAssignment () {
       Object.assign(this.el.style, {
         opacity: '1',
-        'transition-duration': '0.1s'
+        'transition-duration': `${this.speed / 1000}s`
       })
     }
 
@@ -52,7 +54,12 @@ document.addEventListener('DOMContentLoaded', () => {
     loop: false,
     animateCursor: true,
     typeSpeed: 150,
-    deleteSpeed: 150
+    deleteSpeed: 150,
+    blinkSpeed: 100,
+    typeClass: 'type-span',
+    cursorClass: 'cursor-span',
+    typeColor: '',
+    cursorColor: ''
   }
 
   class Typewriter {
@@ -234,17 +241,21 @@ document.addEventListener('DOMContentLoaded', () => {
     createCursorEl () {
       const cursorEl = document.createElement('span')
       cursorEl.innerHTML = '|'
+      cursorEl.style.color = this.options.cursorColor
+      cursorEl.classList.add(this.options.cursorClass)
       
       this.el.appendChild(cursorEl)
 
       if (this.options.animateCursor) {
-        this.cursor = new Cursor(cursorEl)
+        this.cursor = new Cursor(cursorEl, this.options.blinkSpeed)
         this.cursor.start()
       }
     }
 
     createTextEl () {
       const textEl = document.createElement('span')
+      textEl.classList.add(this.options.typeClass)
+      textEl.style.color = this.options.typeColor
       this.el.appendChild(textEl)
 
       this.textEl = textEl
