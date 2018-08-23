@@ -1,10 +1,16 @@
-# Heads-Up.js
+# Type-Right.js
 
-[![headsup.js on NPM](https://img.shields.io/npm/v/headsup.js.svg?style=flat-square)](https://www.npmjs.com/package/headsup.js) [![Standard JavaScript Style](https://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square)](http://standardjs.com/)
+[![type-right.js on NPM](https://img.shields.io/npm/v/type-right.js.svg?style=flat-square)](https://www.npmjs.com/package/type-right.js) [![Standard JavaScript Style](https://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square)](http://standardjs.com/)
 
-Sticky headers that hide on scroll.
+Native typewriter effect, without compromises or dependencies.
 
-[See a demo.](https://chriscavs.github.io/headsup-demo/)
+[See a demo](https://chriscavs.github.io/type-right-demo/) for ideas/examples.
+
+## Why
+
+Creating a custom typewriter effect can be cumbersome and time consuming.  However, most of the libraries out there are either slow, bloated with dependencies, or lacking in functionality.
+
+Type-Right.js was designed to provide maximum flexibility and usability, while remaining fast and dependency free.
 
 ## Usage
 
@@ -12,7 +18,9 @@ Follow these steps to get started:
 
 1. [Install](#install)
 2. [Import](#import)
-4. [Review Options](#options)
+3. [Instanciate](#instanciate)
+4. [Review Api](#api)
+5. [Review Options](#options)
 
 **Note**: It is required that you use a css reset that clears user agent stylesheet margin/padding.
 See here for an [example](https://meyerweb.com/eric/tools/css/reset/).
