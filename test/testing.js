@@ -58,8 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
     blinkSpeed: 200,
     typeClass: 'type-span',
     cursorClass: 'cursor-span',
-    typeColor: '',
-    cursorColor: ''
+    typeColor: 'black',
+    cursorColor: 'black'
   }
 
   class Typewriter {
@@ -111,6 +111,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     changeOptions (options) {
       this.options = Object.assign(this.options, options)
+
+      return this
     }
 
     then (cb) {
@@ -232,10 +234,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loop (idx) {
       if (idx === this.queue.length) {
+        this.running = false
+        
         if (this.options.loop) {
           this.start()
         }
-        this.running = false
         return
       }
 
