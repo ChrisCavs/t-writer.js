@@ -75,7 +75,7 @@ class Typewriter {
     this.el = el
     this.text = ''
     this.queue = []
-    this.options = Object.assign(defaultOptions, options)
+    this.options = Object.assign({}, defaultOptions, options)
 
     this.createTextEl()
   }
