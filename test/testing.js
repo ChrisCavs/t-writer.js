@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
       this.createTextEl()
     }
 
-    // API
+    // USER API
 
     type (str) {
       this.queue.push({
@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
       this.deleteAll().then(_ => this.loop(0))
     }
 
-    // ACTIONS
+    // ACTIONS (promises)
 
     add (content) {
       let count = 0
@@ -326,6 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const textEl = document.createElement('span')
       textEl.classList.add(this.options.typeClass)
       textEl.style.color = this.options.typeColor
+
       this.el.appendChild(textEl)
 
       this.textEl = textEl
