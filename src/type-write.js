@@ -34,14 +34,14 @@ class Cursor {
     this.fadeIn = this.fadeIn.bind(this)
   }
 
-  initialAssignment() {
+  initialAssignment () {
     Object.assign(this.el.style, {
       opacity: '1',
       'transition-duration': '0.1s'
     })
   }
 
-  fade() {
+  fade () {
     this
       .el
       .style
@@ -50,7 +50,7 @@ class Cursor {
     this.faded = true
   }
 
-  fadeIn() {
+  fadeIn () {
     this
       .el
       .style
@@ -59,13 +59,13 @@ class Cursor {
     this.faded = false
   }
 
-  logic() {
+  logic () {
     this.faded
       ? setTimeout(this.fadeIn, this.speed)
       : setTimeout(this.fade, this.speed)
   }
 
-  start() {
+  start () {
     setTimeout(this.fade.bind(this), 0)
   }
 }
@@ -82,7 +82,7 @@ class Typewriter {
 
   // USER API
 
-  type(str) {
+  type (str) {
     this.queue.push({
       type: 'type',
       content: str
@@ -91,7 +91,7 @@ class Typewriter {
     return this
   }
 
-  strings(interval, ...arr) {
+  strings (interval, ...arr) {
     arr.forEach((str, i) => {
       this.queue.push({
         type: 'type',
@@ -116,7 +116,7 @@ class Typewriter {
     return this
   }
 
-  remove(num) {
+  remove (num) {
     this.queue.push({
       type: 'deleteChars',
       count: num
@@ -125,7 +125,7 @@ class Typewriter {
     return this
   }
 
-  clear() {
+  clear () {
     this.queue.push({
       type: 'clear'
     })
@@ -133,7 +133,7 @@ class Typewriter {
     return this
   }
 
-  rest(time) {
+  rest (time) {
     this.queue.push({
       type: 'pause',
       time
@@ -142,13 +142,13 @@ class Typewriter {
     return this
   }
 
-  changeOps(options) {
+  changeOps (options) {
     this.options = Object.assign(this.options, options)
 
     return this
   }
 
-  then(cb) {
+  then (cb) {
     this.queue.push({
       type: 'callback',
       cb
@@ -157,7 +157,31 @@ class Typewriter {
     return this
   }
 
-  start() {
+  removeCursor () {
+    this.queue.push({
+      type: 'deleteCursor'
+    })
+
+    return this
+  }
+
+  addCursor () {
+    this.queue.push({
+      type: 'createCursor'
+    })
+
+    return this
+  }
+
+  clean () {
+    this.queue = []
+    this.text = ''
+    render()
+
+    return this
+  }
+
+  start () {
     if (this.running) return
 
     if (!this.cursorEl) {
@@ -232,6 +256,20 @@ class Typewriter {
     })
   }
 
+  deleteCursor () {
+    return new Promise((resolve, _) => {
+      this.removeCursorEl()
+      resolve()
+    })
+  }
+
+  createCursor () {
+    return new Promise((resolve, _) => {
+      this.createCursorEl()
+      resolve()
+    })
+  }
+
   // HELPERS
 
   deleteChar() {
@@ -290,6 +328,12 @@ class Typewriter {
 
       case 'callback':
         return this.callback(action.cb)
+
+      case 'deleteCursor':
+        return this.deleteCursor()
+
+      case 'createCursor':
+        return this.
     }
   }
 
@@ -320,6 +364,13 @@ class Typewriter {
       this.cursor = new Cursor(this.cursorEl, this.options.blinkSpeed)
       this.cursor.start()
     }
+  }
+
+  removeCursorEl() {
+    this
+      .el
+      .parentElement
+      .removeChild(this.cursorEl)
   }
 
   createTextEl() {
