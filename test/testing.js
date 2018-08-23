@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     strings (interval, ...arr) {
-      arr.forEach(str => {
+      arr.forEach((str, i) => {
         this.queue.push({
           type: 'type',
           content: str
@@ -106,6 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
             time: interval
           })
         }
+
+        if (i === arr.length - 1) return
 
         this.queue.push({
           type: 'deleteChars',

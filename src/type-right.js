@@ -92,7 +92,7 @@ class Typewriter {
   }
 
   strings(interval, ...arr) {
-    arr.forEach(str => {
+    arr.forEach((str, i) => {
       this.queue.push({
         type: 'type',
         content: str
@@ -104,6 +104,8 @@ class Typewriter {
           time: interval
         })
       }
+
+      if (i === arr.length - 1) return
 
       this.queue.push({
         type: 'deleteChars',

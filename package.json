@@ -13,7 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/ChrisCavs/type-right.js.git"
   },
-  "keywords": [],
+  "keywords": ['typewriter','effect', 'type', 'right'],
   "author": {
     "name": "Christopher Cavalea",
     "email": "chriscavs94@gmail.com",
