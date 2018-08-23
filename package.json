@@ -1,7 +1,7 @@
 {
   "name": "type-right.js",
   "version": "1.0.0",
-  "description": "Native typewriter effect, without compromises.",
+  "description": "Native typewriter effect, without compromises or dependencies.",
   "main": "dist/type-right.js",
   "license": "MIT",
   "scripts": {
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ChrisCavs/headsup.js.git"
+    "url": "git+https://github.com/ChrisCavs/type-right.js.git"
   },
   "keywords": [],
   "author": {
