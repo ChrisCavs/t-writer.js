@@ -2,7 +2,7 @@ const defaultOptions = {
   loop: false,
   animateCursor: true,
 
-  blinkSpeed: 200,
+  blinkSpeed: 400,
 
   typeSpeed: 125,
   deleteSpeed: 85,
@@ -133,7 +133,15 @@ class Typewriter {
     return this
   }
 
-  clearImmediately () {
+  clearText () {
+    this.text = ''
+    this.render()
+
+    return this
+  }
+
+  clearQueue() {
+    this.queue = []
     this.text = ''
     render()
 
@@ -176,14 +184,6 @@ class Typewriter {
     this.queue.push({
       type: 'createCursor'
     })
-
-    return this
-  }
-
-  clean () {
-    this.queue = []
-    this.text = ''
-    render()
 
     return this
   }
@@ -376,8 +376,9 @@ class Typewriter {
   removeCursorEl() {
     this
       .el
-      .parentElement
       .removeChild(this.cursorEl)
+
+    this.cursorEl = null
   }
 
   createTextEl() {
