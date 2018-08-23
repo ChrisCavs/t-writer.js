@@ -133,6 +133,13 @@ class Typewriter {
     return this
   }
 
+  clearImmediately () {
+    this.text = ''
+    render()
+
+    return this
+  }
+
   rest (time) {
     this.queue.push({
       type: 'pause',
@@ -333,7 +340,7 @@ class Typewriter {
         return this.deleteCursor()
 
       case 'createCursor':
-        return this.
+        return this.createCursor()
     }
   }
 
