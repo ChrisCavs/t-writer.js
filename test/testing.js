@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initialAssignment () {
       Object.assign(this.el.style, {
         opacity: '1',
-        'transition-duration': `${this.speed / 1000}s`
+        'transition-duration': '0.1s'
       })
     }
 
@@ -41,8 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     logic () {
       this.faded
-        ? setTimeout(this.fadeIn, 400)
-        : setTimeout(this.fade, 400)
+        ? setTimeout(this.fadeIn, this.speed)
+        : setTimeout(this.fade, this.speed)
     }
 
     start () {
@@ -53,9 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const defaultOptions = {
     loop: false,
     animateCursor: true,
-    typeSpeed: 150,
-    deleteSpeed: 150,
-    blinkSpeed: 100,
+    typeSpeed: 125,
+    deleteSpeed: 85,
+    blinkSpeed: 200,
     typeClass: 'type-span',
     cursorClass: 'cursor-span',
     typeColor: '',
@@ -123,7 +123,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     start() {
-      this.createCursorEl()
+      if (!this.cursorEl) {
+        this.createCursorEl()
+      }
+
+      if (this.text !== '') {
+        this.deleteAll().then(_ => this.loop(0))
+      } else {
+        this.loop(0)
+      }
+    }
+
+    rerun () {
       this.loop(0)
     }
 
@@ -229,7 +240,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (this.options.loop) {
           this.deleteAll().then(_ => this.loop(0))
         }
-
         return
       }
 
@@ -239,15 +249,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     createCursorEl () {
-      const cursorEl = document.createElement('span')
-      cursorEl.innerHTML = '|'
-      cursorEl.style.color = this.options.cursorColor
-      cursorEl.classList.add(this.options.cursorClass)
+      this.cursorEl = document.createElement('span')
+      this.cursorEl.innerHTML = '|'
+      this.cursorEl.style.color = this.options.cursorColor
+      this.cursorEl.classList.add(this.options.cursorClass)
       
-      this.el.appendChild(cursorEl)
+      this.el.appendChild(this.cursorEl)
 
       if (this.options.animateCursor) {
-        this.cursor = new Cursor(cursorEl, this.options.blinkSpeed)
+        this.cursor = new Cursor(this.cursorEl, this.options.blinkSpeed)
         this.cursor.start()
       }
     }
