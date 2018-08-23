@@ -4,11 +4,11 @@ const defaultOptions = {
 
   blinkSpeed: 400,
 
-  typeSpeed: 125,
-  deleteSpeed: 85,
+  typeSpeed: 100,
+  deleteSpeed: 40,
 
-  typeSpeedMin: 85,
-  typeSpeedMax: 150,
+  typeSpeedMin: 65,
+  typeSpeedMax: 130,
 
   deleteSpeedMin: 85,
   deleteSpeedMax: 150,
@@ -140,6 +140,14 @@ class Typewriter {
     return this
   }
 
+  queueClearText () {
+    this.queue.push({
+      type: 'clearText'
+    })
+
+    return this
+  }
+
   clearQueue() {
     this.queue = []
     this.text = ''
@@ -158,7 +166,11 @@ class Typewriter {
   }
 
   changeOps (options) {
-    this.options = Object.assign(this.options, options)
+
+    this.queue.push({
+      type: 'changeOps',
+      options
+    })
 
     return this
   }
@@ -277,6 +289,20 @@ class Typewriter {
     })
   }
 
+  clearTextAction () {
+    return new Promise((resolve, _) => {
+      this.clearText()
+      resolve()
+    })
+  }
+
+  changeOpsAction (options) {
+    return new Promise((resolve, _) => {
+      this.options = Object.assign(this.options, options)
+      resolve()
+    })
+  }
+
   // HELPERS
 
   deleteChar() {
@@ -341,6 +367,12 @@ class Typewriter {
 
       case 'createCursor':
         return this.createCursor()
+
+      case 'clearText':
+        return this.clearTextAction()
+
+      case 'changeOps':
+        return this.changeOpsAction(action.options)
     }
   }
 
@@ -382,13 +414,11 @@ class Typewriter {
   }
 
   createTextEl() {
-    const textEl = document.createElement('span')
-    textEl.classList.add(this.options.typeClass)
-    textEl.style.color = this.options.typeColor
+    this.textEl = document.createElement('span')
+    this.textEl.classList.add(this.options.typeClass)
+    this.textEl.style.color = this.options.typeColor
 
-    this.el.appendChild(textEl)
-
-    this.textEl = textEl
+    this.el.appendChild(this.textEl)
   }
 
   render() {
