@@ -93,11 +93,23 @@ document.addEventListener('DOMContentLoaded', () => {
       return this
     }
 
-    strings (...arr) {
+    strings (interval, ...arr) {
       arr.forEach(str => {
         this.queue.push({
           type: 'type',
           content: str
+        })
+
+        if (interval) {
+          this.queue.push({
+            type: 'pause',
+            time: interval
+          })
+        }
+
+        this.queue.push({
+          type: 'deleteChars',
+          count: str.length
         })
       })
 
@@ -169,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
           const newStamp = Date.now()
 
-          if (newStamp - this.timestamp >= this.options.typeSpeed) {
+          if (newStamp - this.timestamp >= this.getTypeSpeed()) {
             this.addChar(content[count])
             this.timestamp = newStamp
             count++
@@ -191,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
           const newStamp = Date.now()
 
-          if (newStamp - this.timestamp >= this.options.deleteSpeed) {
+          if (newStamp - this.timestamp >= this.getDeleteSpeed()) {
             this.deleteChar()
             this.timestamp = newStamp
             count--
