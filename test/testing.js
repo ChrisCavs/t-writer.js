@@ -1,5 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+  const defaultOptions = {
+    loop: false,
+    animateCursor: true,
+
+    blinkSpeed: 200,
+
+    typeSpeed: 125,
+    deleteSpeed: 85,
+
+    typeSpeedMin: 85,
+    typeSpeedMax: 150,
+
+    deleteSpeedMin: 85,
+    deleteSpeedMax: 150,
+
+    typeClass: 'type-span',
+    cursorClass: 'cursor-span',
+
+    typeColor: 'black',
+    cursorColor: 'black'
+  }
+
   class Cursor {
     constructor (el, speed) {
       this.el = el
@@ -50,18 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  const defaultOptions = {
-    loop: false,
-    animateCursor: true,
-    typeSpeed: 125,
-    deleteSpeed: 85,
-    blinkSpeed: 200,
-    typeClass: 'type-span',
-    cursorClass: 'cursor-span',
-    typeColor: 'black',
-    cursorColor: 'black'
-  }
-
   class Typewriter {
     constructor (el, options) {
       this.el = el
@@ -83,7 +93,18 @@ document.addEventListener('DOMContentLoaded', () => {
       return this
     }
 
-    deleteChars (num) {
+    strings (...arr) {
+      arr.forEach(str => {
+        this.queue.push({
+          type: 'type',
+          content: str
+        })
+      })
+
+      return this
+    }
+
+    remove (num) {
       this.queue.push({
         type: 'deleteChars',
         count: num
@@ -109,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return this
     }
 
-    changeOptions (options) {
+    changeOps (options) {
       this.options = Object.assign(this.options, options)
 
       return this
@@ -209,6 +230,34 @@ document.addEventListener('DOMContentLoaded', () => {
     addChar(char) {
       this.text += char
       this.render()
+    }
+
+    getTypeSpeed () {
+      const speed = this.options.typeSpeed
+
+      if (typeof speed === 'number') {
+        return speed
+      }
+
+      const max = this.options.typeSpeedMax
+      const min = this.options.typeSpeedMin
+
+      const random = Math.floor(Math.random() * (max-min))
+      return random + min
+    }
+
+    getDeleteSpeed () {
+      const speed = this.options.deleteSpeed
+
+      if (typeof speed === 'number') {
+        return speed
+      }
+
+      const max = this.options.deleteSpeedMax
+      const min = this.options.deleteSpeedMin
+
+      const random = Math.floor(Math.random() * (max-min))
+      return random + min
     }
 
     step (idx) {
