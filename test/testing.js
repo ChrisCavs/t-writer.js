@@ -123,19 +123,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     start() {
+      if (this.running) return
+
       if (!this.cursorEl) {
         this.createCursorEl()
       }
-
-      if (this.text !== '') {
-        this.deleteAll().then(_ => this.loop(0))
-      } else {
-        this.loop(0)
-      }
-    }
-
-    rerun () {
-      this.loop(0)
+      
+      this.running = true
+      this.deleteAll().then(_ => this.loop(0))
     }
 
     // ACTIONS
@@ -238,8 +233,9 @@ document.addEventListener('DOMContentLoaded', () => {
     loop (idx) {
       if (idx === this.queue.length) {
         if (this.options.loop) {
-          this.deleteAll().then(_ => this.loop(0))
+          this.start()
         }
+        this.running = false
         return
       }
 
@@ -278,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const test = document.querySelector('.test')
-  const typeWriter = new Typewriter(test, {loop: true})
+  const typeWriter = new Typewriter(test)
 
   window.typewriter = typeWriter
 })
