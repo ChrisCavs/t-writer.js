@@ -200,6 +200,20 @@ class Typewriter {
     return this
   }
 
+  changeTypeColor(color) {
+    this.queue.push({
+      type: 'typeColor',
+      color
+    })
+  }
+
+  changeCursorColor(color) {
+    this.queue.push({
+      type: 'cursorColor',
+      color
+    })
+  }
+
   start () {
     if (this.running) return
 
@@ -303,6 +317,20 @@ class Typewriter {
     })
   }
 
+  typeColor (color) {
+    return new Promise ((resolve, _) => {
+      this.textEl.style.color = color
+      resolve()
+    })
+  }
+
+  cursorColor (color) {
+    return new Promise((resolve, _) => {
+      this.cursorEl.style.color = color
+      resolve()
+    })
+  }
+
   // HELPERS
 
   deleteChar() {
@@ -373,6 +401,12 @@ class Typewriter {
 
       case 'changeOps':
         return this.changeOpsAction(action.options)
+
+      case 'typeColor':
+        return this.typeColor(action.color)
+      
+      case 'cursorColor':
+        return this.cursorColor(action.color)
     }
   }
 
