@@ -269,7 +269,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     render () {
       this.textEl.innerHTML = this.text
-      console.log(this.text)
     }
   }
 
