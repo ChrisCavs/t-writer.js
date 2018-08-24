@@ -205,6 +205,8 @@ class Typewriter {
       type: 'typeColor',
       color
     })
+
+    return this
   }
 
   changeCursorColor(color) {
@@ -212,6 +214,8 @@ class Typewriter {
       type: 'cursorColor',
       color
     })
+
+    return this
   }
 
   changeTypeClass(className) {
@@ -219,6 +223,8 @@ class Typewriter {
       type: 'typeClass',
       className
     })
+
+    return this
   }
 
   changeCursorClass(className) {
@@ -226,6 +232,8 @@ class Typewriter {
       type: 'cursorClass',
       className
     })
+
+    return this 
   }
 
   start () {
@@ -460,6 +468,7 @@ class Typewriter {
   }
 
   createCursorEl() {
+    if (typeof this.options.animateCursor === 'String') return
     this.cursorEl = document.createElement('span')
     this.cursorEl.innerHTML = '|'
     this.cursorEl.style.color = this.options.cursorColor
