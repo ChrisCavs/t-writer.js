@@ -133,6 +133,22 @@ This differs from [clearText](#clearText) and [queueClearText](#queueClearText).
 
 Invoke the specified callback.
 
+### queueClearText
+
+Will queue the `clearText` action.  This differs from [clearText](#clearText).  `queueClearText` will clear the text of the writer at the specified point in the queue.
+
+`queueClearText` is the only way to clear the text of the writer while it is running/looping.
+
+### changeOps (options)
+
+* options -> `object`
+
+Will change the writer's [options](#options) at the specified point in the queue.  **These options will persist for all further runs/loops** of this particular instance.
+
+### removeCursor
+
+### addCursor
+
 ## Options
 
 It is not required to pass in options, as each option comes with a default:
