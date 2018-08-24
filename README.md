@@ -21,7 +21,7 @@ Follow these steps to get started:
 3. [Instanciate](#instanciate)
 5. [Review Options](#options)
 4. [Review Api](#api)
-5. [Browser Support](#browser)
+5. [Browser Support](#browserSupport)
 
 ### Install
 
