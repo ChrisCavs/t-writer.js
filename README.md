@@ -4,7 +4,7 @@
 
 Native typewriter effect, without compromises or dependencies.
 
-[See a demo](https://chriscavs.github.io/type-right-demo/) for ideas/examples.
+[See a demo](https://chriscavs.github.io/type-write-demo/) for ideas/examples.
 
 ## Why
 
@@ -19,9 +19,10 @@ Follow these steps to get started:
 1. [Install](#install)
 2. [Import](#import)
 3. [Instanciate](#instanciate)
+4. [Overview](#overview)
 5. [Review Options](#options)
-4. [Review Api](#api)
-5. [Browser Support](#browsersupport)
+6. [Review Api](#api)
+7. [Browser Support](#browsersupport)
 
 ### Install
 
@@ -55,6 +56,15 @@ const options = {
 const writer = new Typewriter(target, options)
 ```
 
+## Overview (how to use)
+
+To create a typewriter effect with Type-Write, you need to:
+
+1. queue up actions
+2. call the `start()` method
+
+To queue up actions, use one of the [queue methods](#queue) in the API reference below.
+
 ## Options
 
 All options come with defaults, and are truly optional. The defaults are shown below:
@@ -84,9 +94,9 @@ const defaultOptions = {
 ```
 
 Explanation of each option follows:
-
-* [loop](#loop)
-* [animateCursor](#animateCursor)
+* general
+  * [loop](#loop)
+  * [animateCursor](#animateCursor)
 * speeds
   * [blinkSpeed](#blinkSpeed)
   * [typeSpeed](#typeSpeed)
@@ -104,68 +114,49 @@ Explanation of each option follows:
 
 ### loop
 
-Any CSS selector that targets to your header element.  It is recommended that you use the default semantic HTML tag.
+Accepts a `boolean`.  
 
-```es6
-headsUp({
-  target: '#header'
-})
-```
+* `true` -> the writer will loop through it's actions on repeat
+* `false` -> the writer will run just one time
 
 ### animateCursor
 
-The time it takes for the header to hide, in seconds.
+Accepts either a `boolean`, or a string of `"none"`.
 
-```es6
-headsUp({
-  duration: 0.5
-})
-```
+* boolean
+  * `true` -> cursor blinks (according to [blinkSpeed](#blinkSpeed))
+  * `false` -> cursor does not blink
+
+* string
+  * `"none"` -> cursor is not added
 
 ### blinkSpeed
 
-Easing function used to transition the header.
+Accepts an `integer`.
 
-```es6
-headsUp({
-  easing: 'ease-in'
-})
-```
-
-Heads-up uses the transition property to accomplish easing.  See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function) for more information.
+The time between each blink, given in milliseconds.  **A lower integer results in a faster blink speed.**
 
 ### typeSpeed
 
-Delay from the time the user starts scrolling until the header starts to hide, in seconds.
+Accepts either an `integer`, or a string of "random".
 
-```es6
-headsUp({
-  delay: 1
-})
-```
+* integer
+  * The time between typing a letter and typing the next, given in milliseconds.  **A lower integer results in a faster type speed.**
+* string
+  * `"random"` -> constantly re-evaluates the speed based on the [typeSpeedMin](#typeSpeedMin) and [typeSpeedMax](#typeSpeedMax).  Used for a more 'human' typing effect.
 
 ### deleteSpeed
 
-When the user scrolls, a function is called to check whether it is necessary to hide or reveal the header.  Specify the amount of time between function calls with the debounce option, in milliseconds.  This may help with performance.
+Accepts either an `integer`, or a string of "random".
 
-```es6
-
-// will wait 100ms after each function call
-
-headsUp({
-  debounce: 100
-})
-```
+* integer
+  * The time between deleting a letter and deleting the next, given in milliseconds.  **A lower integer results in a faster delete speed.**
+* string
+  * `"random"` -> constantly re-evaluates the speed based on the [deleteSpeedMin](#deleteSpeedMin) and [deleteSpeedMax](#deleteSpeedMax).  Used for a more 'human' typing effect.
 
 ### typeSpeedMin
 
-Delay from the time the user starts scrolling until the header starts to hide, in seconds.
 
-```es6
-headsUp({
-  delay: 1
-})
-```
 
 ### typeSpeedMax
 
