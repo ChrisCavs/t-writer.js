@@ -123,11 +123,11 @@ Accepts a `boolean`.
 
 Accepts either a `boolean`, or a string of `"none"`.
 
-* boolean
+* `boolean`
   * `true` -> cursor blinks (according to [blinkSpeed](#blinkSpeed))
   * `false` -> cursor does not blink
 
-* string
+* `string`
   * `"none"` -> cursor is not added
 
 ### blinkSpeed
@@ -138,95 +138,69 @@ The time between each blink, given in milliseconds.  **A lower integer results i
 
 ### typeSpeed
 
-Accepts either an `integer`, or a string of "random".
+Accepts either an `integer`, or a string of `"random"`.
 
-* integer
+* `integer`
   * The time between typing a letter and typing the next, given in milliseconds.  **A lower integer results in a faster type speed.**
-* string
+* `string`
   * `"random"` -> constantly re-evaluates the speed based on the [typeSpeedMin](#typeSpeedMin) and [typeSpeedMax](#typeSpeedMax).  Used for a more 'human' typing effect.
 
 ### deleteSpeed
 
-Accepts either an `integer`, or a string of "random".
+Accepts either an `integer`, or a string of `"random"`.
 
-* integer
+* `integer`
   * The time between deleting a letter and deleting the next, given in milliseconds.  **A lower integer results in a faster delete speed.**
-* string
+* `string`
   * `"random"` -> constantly re-evaluates the speed based on the [deleteSpeedMin](#deleteSpeedMin) and [deleteSpeedMax](#deleteSpeedMax).  Used for a more 'human' typing effect.
 
 ### typeSpeedMin
 
+Accepts an `integer`.
 
+The minimum type speed, applicable only if using `typeSpeed: "random"`.
 
 ### typeSpeedMax
 
-Delay from the time the user starts scrolling until the header starts to hide, in seconds.
+Accepts an `integer`.
 
-```es6
-headsUp({
-  delay: 1
-})
-```
+The maximum type speed, applicable only if using `typeSpeed: "random"`.
 
-### typeSpeedMin
+### deleteSpeedMin
 
-Delay from the time the user starts scrolling until the header starts to hide, in seconds.
+Accepts an `integer`.
 
-```es6
-headsUp({
-  delay: 1
-})
-```
+The minimum delete speed, applicable only if using `deleteSpeed: "random"`.
 
 ### deleteSpeedMax
 
-Delay from the time the user starts scrolling until the header starts to hide, in seconds.
+Accepts an `integer`.
 
-```es6
-headsUp({
-  delay: 1
-})
-```
+The maximum delete speed, applicable only if using `deleteSpeed: "random"`.
 
 ### typeClass
 
-Delay from the time the user starts scrolling until the header starts to hide, in seconds.
+Accepts a `string`.
 
-```es6
-headsUp({
-  delay: 1
-})
-```
+The class given to the `<span>` element that wraps around the typed portion of the writer.  Use this option to specifically style the text of the writer.
 
 ### cursorClass
 
-Delay from the time the user starts scrolling until the header starts to hide, in seconds.
+Accepts a `string`.
 
-```es6
-headsUp({
-  delay: 1
-})
-```
+The class given to the `<span>` element that wraps around the cursor portion of the writer.  Use this option to specifically style the cursor of the writer.
 
 ### typeColor
 
-Delay from the time the user starts scrolling until the header starts to hide, in seconds.
+Accepts a `string` of any CSS color (rbg, 'white', etc).
 
-```es6
-headsUp({
-  delay: 1
-})
-```
+Applies an inline-style to the `<span>` element that wraps around the text portion of the writer.
 
 ### cursorColor
 
-Delay from the time the user starts scrolling until the header starts to hide, in seconds.
+Accepts a `string` of any CSS color (rbg, 'white', etc).
 
-```es6
-headsUp({
-  delay: 1
-})
-```
+Applies an inline-style to the `<span>` element that wraps around the cursor portion of the writer.
 
 ## Browser Support
 
