@@ -469,15 +469,28 @@ class Typewriter {
 
   createCursorEl() {
     if (typeof this.options.animateCursor === 'String') return
+
     this.cursorEl = document.createElement('span')
     this.cursorEl.innerHTML = '|'
-    this.cursorEl.style.color = this.options.cursorColor
-    this.cursorEl.classList.add(this.options.cursorClass)
+
+    this
+      .cursorEl
+      .style
+      .color = this.options.cursorColor
+
+    this
+      .cursorEl
+      .classList
+      .add(this.options.cursorClass)
 
     this.el.appendChild(this.cursorEl)
 
     if (this.options.animateCursor) {
-      this.cursor = new Cursor(this.cursorEl, this.options.blinkSpeed)
+      this.cursor = new Cursor(
+        this.cursorEl, 
+        this.options.blinkSpeed
+      )
+      
       this.cursor.start()
     }
   }
@@ -492,8 +505,16 @@ class Typewriter {
 
   createTextEl() {
     this.textEl = document.createElement('span')
-    this.textEl.classList.add(this.options.typeClass)
-    this.textEl.style.color = this.options.typeColor
+
+    this
+      .textEl
+      .classList
+      .add(this.options.typeClass)
+
+    this
+      .textEl
+      .style
+      .color = this.options.typeColor
 
     this.el.appendChild(this.textEl)
   }
