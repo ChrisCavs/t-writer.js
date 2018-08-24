@@ -4,14 +4,14 @@ const defaultOptions = {
 
   blinkSpeed: 400,
 
-  typeSpeed: 100,
+  typeSpeed: 90,
   deleteSpeed: 40,
 
   typeSpeedMin: 65,
-  typeSpeedMax: 130,
+  typeSpeedMax: 115,
 
-  deleteSpeedMin: 85,
-  deleteSpeedMax: 150,
+  deleteSpeedMin: 40,
+  deleteSpeedMax: 90,
 
   typeClass: 'type-span',
   cursorClass: 'cursor-span',

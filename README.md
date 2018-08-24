@@ -20,8 +20,8 @@ Follow these steps to get started:
 2. [Import](#import)
 3. [Instanciate](#instanciate)
 4. [Overview](#overview)
-5. [Review Options](#options)
 6. [Review Api](#api)
+5. [Review Options](#options)
 
 ### Install
 
@@ -44,7 +44,7 @@ import Typewriter from 'type-write.js'
 Make as many instances of the Typewriter class as you would like.  Upon instantiation, pass in the target element that will contain the typewriter, as well as an options hash.
 
 ```es6
-// target element => <div class="tw"></div>
+// target element  <div class="tw"></div>
 
 const target = document.querySelector('.tw')
 
@@ -62,11 +62,52 @@ To create a typewriter effect with Type-Write, you need to:
 1. queue up actions
 2. call the `start()` method
 
-To queue up actions, use one of the [queue methods](#queue) in the API reference below.
+To queue up actions, use one of the [queue methods](#queue) in the API reference below.  You can chain methods together to keep code DRY.  See the [demo](https://chriscavs.github.io/type-write-demo/) for examples.
+
+Every action returns a promise, guaranteeing that only one action is running at a time.  This improves performance, since it eliminates the need to contantly check whether to continue to the next action.
+
+The order of actions is preserved, so the same queue can be used as many times as the user wishes.  To clear the queue (effectively wiping the slate clean), simply use the [clearQueue](#clearQueue) method.
+
+## API
+
+Queue Methods:
+* [type](#type)
+* [remove](#remove)
+* [rest](#rest)
+* [strings](#strings)
+* [clear](#clear)
+* [then](#then)
+
+* [queueClearText](#queueClearText)
+* [changeOps](#changeOps)
+* [removeCursor](#removeCursor)
+* [addCursor](#addCursor)
+
+* [changeTypeColor](#changeTypeColor)
+* [changeCursorColor](#changeCursorColor)
+* [changeTypeClass](#changeTypeClass)
+* [changeCursorClass](#changeCursorClass)
+
+Other:
+* [start](#start)
+* [clearText](#clearText)
+* [clearQueue](#clearQueue)
+
+### type
+
+### remove
+
+### rest
+
+### strings
+
+### clear
+
+### then
 
 ## Options
 
-All options come with defaults, and are truly optional. The defaults are shown below:
+It is not required to pass in options, as each option comes with a default:
 
 ```es6
 const defaultOptions = {
@@ -75,14 +116,14 @@ const defaultOptions = {
 
   blinkSpeed: 400,
 
-  typeSpeed: 100,
+  typeSpeed: 90,
   deleteSpeed: 40,
 
   typeSpeedMin: 65,
-  typeSpeedMax: 130,
+  typeSpeedMax: 115,
 
-  deleteSpeedMin: 85,
-  deleteSpeedMax: 150,
+  deleteSpeedMin: 40,
+  deleteSpeedMax: 90,
 
   typeClass: 'type-span',
   cursorClass: 'cursor-span',
@@ -93,6 +134,7 @@ const defaultOptions = {
 ```
 
 Explanation of each option follows:
+
 general
 * [loop](#loop)
 * [animateCursor](#animateCursor)
@@ -200,43 +242,6 @@ Applies an inline-style to the `<span>` element that wraps around the text porti
 Accepts a `string` of any CSS color (rbg, 'white', etc).
 
 Applies an inline-style to the `<span>` element that wraps around the cursor portion of the writer.
-
-## API
-
-Queue Methods:
-* [type](#type)
-* [remove](#remove)
-* [rest](#rest)
-* [strings](#strings)
-* [clear](#clear)
-* [then](#then)
-
-* [queueClearText](#queueClearText)
-* [changeOps](#changeOps)
-* [removeCursor](#removeCursor)
-* [addCursor](#addCursor)
-
-* [changeTypeColor](#changeTypeColor)
-* [changeCursorColor](#changeCursorColor)
-* [changeTypeClass](#changeTypeClass)
-* [changeCursorClass](#changeCursorClass)
-
-Other:
-* [start](#start)
-* [clearText](#clearText)
-* [clearQueue](#clearQueue)
-
-### type
-
-### remove
-
-### rest
-
-### strings
-
-### clear
-
-### then
 
 ## Browser Support
 
