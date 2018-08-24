@@ -19,18 +19,16 @@ Follow these steps to get started:
 1. [Install](#install)
 2. [Import](#import)
 3. [Instanciate](#instanciate)
-4. [Review Api](#api)
 5. [Review Options](#options)
-
-**Note**: It is required that you use a css reset that clears user agent stylesheet margin/padding.
-See here for an [example](https://meyerweb.com/eric/tools/css/reset/).
+4. [Review Api](#api)
+5. [Browser Support](#browser support)
 
 ### Install
 
-Using NPM, install Heads-up, and save it to your `package.json` dependencies.
+Using NPM, install Type-Write and save it to your `package.json` dependencies.
 
 ```bash
-$ npm install headsup.js --save
+$ npm install type-write.js --save
 ```
 
 ### Import
@@ -38,32 +36,73 @@ $ npm install headsup.js --save
 Import Heads-up, naming it according to your preference.
 
 ```es6
-import headsUp from 'headsup.js'
+import Typewriter from 'type-write.js'
+```
+
+### Instanciate
+
+Make as many instances of the Typewriter class as you would like.  Upon instantiation, pass in the target element that will contain the typewriter, as well as an options hash.
+
+```es6
+// target element => <div class="tw"></div>
+
+const target = document.querySelector('.tw')
+
+const options = {
+  loop: true
+}
+
+const writer = new Typewriter(target, options)
 ```
 
 ## Options
 
-All options are optional, and come with defaults. The defaults are shown below:
+All options come with defaults, and are truly optional. The defaults are shown below:
 
 ```es6
-headsUp({
-  selector: 'header',
-  duration: 0.3,
-  easing: 'ease',
-  delay: 0,
-  debounce: false
-})
+const defaultOptions = {
+  loop: false,
+  animateCursor: true,
+
+  blinkSpeed: 400,
+
+  typeSpeed: 100,
+  deleteSpeed: 40,
+
+  typeSpeedMin: 65,
+  typeSpeedMax: 130,
+
+  deleteSpeedMin: 85,
+  deleteSpeedMax: 150,
+
+  typeClass: 'type-span',
+  cursorClass: 'cursor-span',
+
+  typeColor: 'black',
+  cursorColor: 'black'
+}
 ```
 
 Explanation of each option follows:
 
-* [selector](#selector)
-* [duration](#duration)
-* [easing](#easing)
-* [delay](#delay)
-* [debounce](#debounce)
+* [loop](#loop)
+* [animateCursor](#animateCursor)
+* speeds
+  * [blinkSpeed](#blinkSpeed)
+  * [typeSpeed](#typeSpeed)
+  * [deleteSpeed](#deleteSpeed)
+  * [typeSpeedMin](#typeSpeedMin)
+  * [typeSpeedMax](#typeSpeedMax)
+  * [deleteSpeedMin](#deleteSpeedMin)
+  * [deleteSpeedMax](#deleteSpeedMax)
+* classes
+  * [typeClass](#typeClass)
+  * [cursorClass](#cursorClass)
+* colors
+  * [typeColor](#typeColor)
+  * [cursorColor](#cursorColor)
 
-### selector
+### loop
 
 Any CSS selector that targets to your header element.  It is recommended that you use the default semantic HTML tag.
 
@@ -73,7 +112,7 @@ headsUp({
 })
 ```
 
-### duration
+### animateCursor
 
 The time it takes for the header to hide, in seconds.
 
@@ -83,7 +122,7 @@ headsUp({
 })
 ```
 
-### easing
+### blinkSpeed
 
 Easing function used to transition the header.
 
@@ -95,7 +134,7 @@ headsUp({
 
 Heads-up uses the transition property to accomplish easing.  See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function) for more information.
 
-### delay
+### typeSpeed
 
 Delay from the time the user starts scrolling until the header starts to hide, in seconds.
 
@@ -105,7 +144,7 @@ headsUp({
 })
 ```
 
-### debounce
+### deleteSpeed
 
 When the user scrolls, a function is called to check whether it is necessary to hide or reveal the header.  Specify the amount of time between function calls with the debounce option, in milliseconds.  This may help with performance.
 
@@ -115,6 +154,86 @@ When the user scrolls, a function is called to check whether it is necessary to 
 
 headsUp({
   debounce: 100
+})
+```
+
+### typeSpeedMin
+
+Delay from the time the user starts scrolling until the header starts to hide, in seconds.
+
+```es6
+headsUp({
+  delay: 1
+})
+```
+
+### typeSpeedMax
+
+Delay from the time the user starts scrolling until the header starts to hide, in seconds.
+
+```es6
+headsUp({
+  delay: 1
+})
+```
+
+### typeSpeedMin
+
+Delay from the time the user starts scrolling until the header starts to hide, in seconds.
+
+```es6
+headsUp({
+  delay: 1
+})
+```
+
+### deleteSpeedMax
+
+Delay from the time the user starts scrolling until the header starts to hide, in seconds.
+
+```es6
+headsUp({
+  delay: 1
+})
+```
+
+### typeClass
+
+Delay from the time the user starts scrolling until the header starts to hide, in seconds.
+
+```es6
+headsUp({
+  delay: 1
+})
+```
+
+### cursorClass
+
+Delay from the time the user starts scrolling until the header starts to hide, in seconds.
+
+```es6
+headsUp({
+  delay: 1
+})
+```
+
+### typeColor
+
+Delay from the time the user starts scrolling until the header starts to hide, in seconds.
+
+```es6
+headsUp({
+  delay: 1
+})
+```
+
+### cursorColor
+
+Delay from the time the user starts scrolling until the header starts to hide, in seconds.
+
+```es6
+headsUp({
+  delay: 1
 })
 ```
 
