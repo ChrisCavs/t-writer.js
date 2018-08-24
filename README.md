@@ -93,17 +93,45 @@ Other:
 * [clearText](#clearText)
 * [clearQueue](#clearQueue)
 
-### type
+### type (str)
 
-### remove
+* str -> `string`
 
-### rest
+Types the `string` given as an argument.
 
-### strings
+### remove (num)
+
+* num -> `integer`
+
+Removes the number of characters given as an argument.
+
+### rest (interval)
+
+* interval -> `integer`
+  * amount of time, in milliseconds
+
+Pauses the writer for the specified period of time.
+
+### strings (interval, string1 [, string2, ...])
+
+* interval -> `integer`
+  * amount of time, in milliseconds
+* string1 -> `string`
+  * a string to be typed out
+
+The writer will type out the first string, then rest for `interval` amount of time, then type the next string.
 
 ### clear
 
-### then
+Clear out the writer by deleting each character.  
+
+This differs from [clearText](#clearText) and [queueClearText](#queueClearText).  `clear` will delete characters one by one, according to the `deleteSpeed` specified.
+
+### then (callback)
+
+* callback -> `function`
+
+Invoke the specified callback.
 
 ## Options
 
