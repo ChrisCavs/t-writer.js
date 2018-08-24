@@ -259,8 +259,9 @@ class Typewriter {
         if (count === content.length) return resolve()
 
         const newStamp = Date.now()
+        const change = newStamp - this.timestamp
 
-        if (newStamp - this.timestamp >= this.getTypeSpeed()) {
+        if (change >= this.getTypeSpeed()) {
           this.addChar(content[count])
           this.timestamp = newStamp
           count++
@@ -281,8 +282,9 @@ class Typewriter {
         if (count === 0) return resolve()
 
         const newStamp = Date.now()
+        const change = newStamp - this.timestamp
 
-        if (newStamp - this.timestamp >= this.getDeleteSpeed()) {
+        if (change >= this.getDeleteSpeed()) {
           this.deleteChar()
           this.timestamp = newStamp
           count--
