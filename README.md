@@ -1,6 +1,6 @@
-# Type-Right.js
+# Type-Write.js
 
-[![type-right.js on NPM](https://img.shields.io/npm/v/type-right.js.svg?style=flat-square)](https://www.npmjs.com/package/type-right.js) [![Standard JavaScript Style](https://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square)](http://standardjs.com/)
+[![type-write.js on NPM](https://img.shields.io/npm/v/type-write.js.svg?style=flat-square)](https://www.npmjs.com/package/type-write.js) [![Standard JavaScript Style](https://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square)](http://standardjs.com/)
 
 Native typewriter effect, without compromises or dependencies.
 
@@ -22,7 +22,6 @@ Follow these steps to get started:
 4. [Overview](#overview)
 5. [Review Options](#options)
 6. [Review Api](#api)
-7. [Browser Support](#browsersupport)
 
 ### Install
 
@@ -56,7 +55,7 @@ const options = {
 const writer = new Typewriter(target, options)
 ```
 
-## Overview (how to use)
+### Overview (how to use)
 
 To create a typewriter effect with Type-Write, you need to:
 
@@ -94,23 +93,23 @@ const defaultOptions = {
 ```
 
 Explanation of each option follows:
-* general
-  * [loop](#loop)
-  * [animateCursor](#animateCursor)
-* speeds
-  * [blinkSpeed](#blinkSpeed)
-  * [typeSpeed](#typeSpeed)
-  * [deleteSpeed](#deleteSpeed)
-  * [typeSpeedMin](#typeSpeedMin)
-  * [typeSpeedMax](#typeSpeedMax)
-  * [deleteSpeedMin](#deleteSpeedMin)
-  * [deleteSpeedMax](#deleteSpeedMax)
-* classes
-  * [typeClass](#typeClass)
-  * [cursorClass](#cursorClass)
-* colors
-  * [typeColor](#typeColor)
-  * [cursorColor](#cursorColor)
+general
+* [loop](#loop)
+* [animateCursor](#animateCursor)
+speeds
+* [blinkSpeed](#blinkSpeed)
+* [typeSpeed](#typeSpeed)
+* [deleteSpeed](#deleteSpeed)
+* [typeSpeedMin](#typeSpeedMin)
+* [typeSpeedMax](#typeSpeedMax)
+* [deleteSpeedMin](#deleteSpeedMin)
+* [deleteSpeedMax](#deleteSpeedMax)
+classes
+* [typeClass](#typeClass)
+* [cursorClass](#cursorClass)
+colors
+* [typeColor](#typeColor)
+* [cursorColor](#cursorColor)
 
 ### loop
 
@@ -201,6 +200,43 @@ Applies an inline-style to the `<span>` element that wraps around the text porti
 Accepts a `string` of any CSS color (rbg, 'white', etc).
 
 Applies an inline-style to the `<span>` element that wraps around the cursor portion of the writer.
+
+## API
+
+Queue Methods:
+* [type](#type)
+* [remove](#remove)
+* [rest](#rest)
+* [strings](#strings)
+* [clear](#clear)
+* [then](#then)
+
+* [queueClearText](#queueClearText)
+* [changeOps](#changeOps)
+* [removeCursor](#removeCursor)
+* [addCursor](#addCursor)
+
+* [changeTypeColor](#changeTypeColor)
+* [changeCursorColor](#changeCursorColor)
+* [changeTypeClass](#changeTypeClass)
+* [changeCursorClass](#changeCursorClass)
+
+Other:
+* [start](#start)
+* [clearText](#clearText)
+* [clearQueue](#clearQueue)
+
+### type
+
+### remove
+
+### rest
+
+### strings
+
+### clear
+
+### then
 
 ## Browser Support
 
