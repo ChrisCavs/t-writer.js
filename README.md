@@ -337,19 +337,18 @@ Applies an inline-style to the `<span>` element that wraps around the cursor por
 
 Heads-up depends on the following browser APIs:
 
-* [pageYOffset](https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset)
-* [querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector)
-* [getBoundingClientRect](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect)
+* [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame)
+* [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
 Consequently, it supports the following natively:
 
-* Chrome 1+
-* Firefox 3.5+
-* Safari 3.2+
-* Opera 10+
-* IE 9+
-* iOS Safari 4+
-* Android Browser 2+
+* Chrome 32+
+* Firefox 29+
+* Safari 8+
+* Opera 19+
+* IE 9+ [with polyfill](https://github.com/stefanpenner/es6-promise)
+* iOS Safari 8+
+* Android Browser 4.4.4+
 
 ## License
 
