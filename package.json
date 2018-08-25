@@ -1,8 +1,8 @@
 {
-  "name": "type-write.js",
+  "name": "t-writer.js",
   "version": "1.0.0",
   "description": "Native typewriter effect, without compromises or dependencies.",
-  "main": "dist/type-write.js",
+  "main": "dist/t-writer.js",
   "license": "MIT",
   "scripts": {
     "build": "rollup -c",
@@ -11,13 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ChrisCavs/type-write.js.git"
+    "url": "git+https://github.com/ChrisCavs/t-writer.js.git"
   },
   "keywords": [
     "typewriter",
     "effect", 
     "type", 
-    "write"
+    "write",
+    "writer"
   ],
   "author": {
     "name": "Christopher Cavalea",

@@ -1,16 +1,16 @@
-# Type-Write.js
+# T-Writer.js
 
-[![type-write.js on NPM](https://img.shields.io/npm/v/type-write.js.svg?style=flat-square)](https://www.npmjs.com/package/type-write.js) [![Standard JavaScript Style](https://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square)](http://standardjs.com/)
+[![t-writer.js on NPM](https://img.shields.io/npm/v/t-writer.js.svg?style=flat-square)](https://www.npmjs.com/package/t-writer.js) [![Standard JavaScript Style](https://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square)](http://standardjs.com/)
 
 Native typewriter effect, without compromises or dependencies.
 
-[See a demo](https://chriscavs.github.io/type-write-demo/) for ideas/examples.
+[See a demo](https://chriscavs.github.io/t-writer-demo/) for ideas/examples.
 
 ## Why
 
 Creating a custom typewriter effect can be cumbersome and time consuming.  However, most of the libraries out there are either slow, bloated with dependencies, or lacking in functionality.
 
-Type-Write.js was designed to provide maximum flexibility and usability, while remaining fast and dependency free.
+T-Writer.js was designed to provide maximum flexibility and usability, while remaining fast and dependency free.
 
 ## Usage
 
@@ -25,10 +25,10 @@ Follow these steps to get started:
 
 ### Install
 
-Using NPM, install Type-Write and save it to your `package.json` dependencies.
+Using NPM, install T-Writer and save it to your `package.json` dependencies.
 
 ```bash
-$ npm install type-write.js --save
+$ npm install t-writer.js --save
 ```
 
 ### Import
@@ -36,7 +36,7 @@ $ npm install type-write.js --save
 Import Heads-up, naming it according to your preference.
 
 ```es6
-import Typewriter from 'type-write.js'
+import Typewriter from 't-writer.js'
 ```
 
 ### Instanciate
@@ -57,12 +57,12 @@ const writer = new Typewriter(target, options)
 
 ### Overview (how to use)
 
-To create a typewriter effect with Type-Write, you need to:
+To create a typewriter effect with T-Writer, you need to:
 
 1. queue up actions
 2. call the `start()` method
 
-To queue up actions, use one of the [queue methods](#queue) in the API reference below.  You can chain methods together to keep code DRY.  See the [demo](https://chriscavs.github.io/type-write-demo/) for examples.
+To queue up actions, use one of the [queue methods](#queue) in the API reference below.  You can chain methods together to keep code DRY.  See the [demo](https://chriscavs.github.io/t-writer-demo/) for examples.
 
 Every action returns a promise, guaranteeing that only one action is running at a time.  This improves performance, since it eliminates the need to contantly check whether to continue to the next action.
 
