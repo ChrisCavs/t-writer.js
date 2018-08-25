@@ -5,8 +5,8 @@ export default {
   input: 'src/t-writer.js',
   output: {
     file: 'dist/t-writer.js',
-    format: 'iife',
-    name: 'twriter'
+    format: 'umd',
+    name: 't-writer.js'
   },
   plugins: [
     resolve(),
