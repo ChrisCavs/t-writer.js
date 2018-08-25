@@ -10,7 +10,7 @@ Native typewriter effect, without compromises or dependencies.
 
 Creating a custom typewriter effect can be cumbersome and time consuming.  However, most of the libraries out there are either slow, bloated with dependencies, or lacking in functionality.
 
-Type-Right.js was designed to provide maximum flexibility and usability, while remaining fast and dependency free.
+Type-Write.js was designed to provide maximum flexibility and usability, while remaining fast and dependency free.
 
 ## Usage
 
@@ -66,7 +66,7 @@ To queue up actions, use one of the [queue methods](#queue) in the API reference
 
 Every action returns a promise, guaranteeing that only one action is running at a time.  This improves performance, since it eliminates the need to contantly check whether to continue to the next action.
 
-The order of actions is preserved, so the same queue can be used as many times as the user wishes.  To clear the queue (effectively wiping the slate clean), simply use the [clearQueue](#clearQueue) method.
+The order of actions is preserved.  Simply call `start()` again to repeat the effect.  To clear the queue (effectively wiping the slate clean), use the [clearQueue](#clearQueue) method.
 
 ## API
 
@@ -135,9 +135,9 @@ Invoke the specified callback.
 
 ### queueClearText
 
-Will queue the `clearText` action.  This differs from [clearText](#clearText).  `queueClearText` will clear the text of the writer at the specified point in the queue.
+Will queue the `clearText` action.  This differs from [clearText](#clearText) and [clear](#clear).  `queueClearText` will clear the text of the writer **instantly**, at the specified point in the queue.
 
-`queueClearText` is the only way to clear the text of the writer while it is running/looping.
+`queueClearText` is the only way to clear the text of the writer instantly while it is running/looping.
 
 ### changeOps (options)
 
@@ -147,7 +147,53 @@ Will change the writer's [options](#options) at the specified point in the queue
 
 ### removeCursor
 
+Queues a `removeCursor` action, which will remove the cursor until the next loop.
+
 ### addCursor
+
+Queues an `addCursor` action, which will add the cursor back.
+
+**Note**: if using the `animateCursor: 'none'` option, `addCursor` will not take effect.
+
+### changeTypeColor (color)
+
+* color -> `string`
+  * any css color
+
+Changes the color of the typed portion of the writer.
+
+### changeCursorColor (color)
+
+* color -> `string`
+  * any css color
+
+Changes the color of the cursor.
+
+### changeTypeClass (className)
+
+* className -> `string`
+
+Changes the `class` attribute on the `<span>` element that wraps around the text of the writer.
+
+### changeCursorClass (className)
+
+* className -> `string`
+
+Changes the `class` attribute on the `<span>` element that wraps around the cursor.
+
+### start
+
+Starts the effect.  The writer will go through it's queue of actions.
+
+### clearText
+
+Clears all text from the writer **instantly**.  This is not a queued action, therefore, it can only be called once the writer has stopped running.
+
+Since this is not a queued action, `clearText` will never run if the [loop](#loop) option is set to `true`.  Use [queueClearText](#queueClearText) if you wish to clear the writer during a loop.
+
+### clearQueue
+
+Clears the writer's queue, as well as all text in the writer.  This is not a queued action, therefore, it will never run if the [loop](#loop) option is set to `true`.
 
 ## Options
 
