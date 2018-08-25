@@ -2,9 +2,9 @@ import resolve from 'rollup-plugin-node-resolve'
 import babel from 'rollup-plugin-babel'
 
 export default {
-  input: 'src/type-write.js',
+  input: 'src/t-writer.js',
   output: {
-    file: 'dist/type-write.js',
+    file: 'dist/t-writer.js',
     format: 'umd',
     name: 'headsup'
   },
