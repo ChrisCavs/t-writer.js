@@ -6,7 +6,7 @@ export default {
   output: {
     file: 'dist/t-writer.js',
     format: 'umd',
-    name: 't-writer.js'
+    name: 't-writer'
   },
   plugins: [
     resolve(),
