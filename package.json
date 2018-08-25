@@ -1,6 +1,6 @@
 {
   "name": "t-writer.js",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Native typewriter effect, without compromises or dependencies.",
   "main": "dist/t-writer.js",
   "license": "MIT",
