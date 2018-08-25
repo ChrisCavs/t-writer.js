@@ -77,12 +77,10 @@ Queue Methods:
 * [strings](#strings)
 * [clear](#clear)
 * [then](#then)
-
 * [queueClearText](#queueClearText)
 * [changeOps](#changeOps)
 * [removeCursor](#removeCursor)
 * [addCursor](#addCursor)
-
 * [changeTypeColor](#changeTypeColor)
 * [changeCursorColor](#changeCursorColor)
 * [changeTypeClass](#changeTypeClass)
