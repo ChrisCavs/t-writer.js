@@ -63,7 +63,7 @@ To create a typewriter effect with T-Writer, you need to:
 1. queue up actions
 2. call the `start()` method
 
-To queue up actions, use one of the [queue methods](#queue) in the API reference below.  You can chain methods together to keep code DRY.  See the [demo](https://chriscavs.github.io/t-writer-demo/) for examples.
+To queue up actions, use one of the [queue methods](#api) in the API reference below.  You can chain methods together to keep code DRY.  See the [demo](https://chriscavs.github.io/t-writer-demo/) for examples.
 
 Every action returns a promise, guaranteeing that only one action is running at a time.  This improves performance, since it eliminates the need to contantly check whether to continue to the next action.
 
