@@ -34,7 +34,7 @@ $ npm install t-writer.js --save
 
 ### Import
 
-Import Heads-up, naming it according to your preference.
+Import T-Writer, naming it according to your preference.
 
 ```es6
 import Typewriter from 't-writer.js'
@@ -334,7 +334,7 @@ Applies an inline-style to the `<span>` element that wraps around the cursor por
 
 ## Browser Support
 
-Heads-up depends on the following browser APIs:
+T-Writer depends on the following browser APIs:
 
 * [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame)
 * [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
