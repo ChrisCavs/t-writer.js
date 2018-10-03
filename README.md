@@ -67,30 +67,30 @@ To queue up actions, use one of the [queue methods](#api) in the API reference b
 
 Every action returns a promise, guaranteeing that only one action is running at a time.  This improves performance, since it eliminates the need to contantly check whether to continue to the next action.
 
-The order of actions is preserved.  Simply call `start()` again to repeat the effect.  To clear the queue (effectively wiping the slate clean), use the [clearQueue](#clearQueue) method.
+The order of actions is preserved.  Simply call `start()` again to repeat the effect.  To clear the queue (effectively wiping the slate clean), use the [clearQueue](#clearqueue) method.
 
 ## API
 
 Queue Methods:
-* [type](#type)
-* [remove](#remove)
-* [rest](#rest)
-* [strings](#strings)
+* [type](#type-str)
+* [remove](#remove-num)
+* [rest](#rest-interval)
+* [strings](#strings-interval-string1--string2-)
 * [clear](#clear)
-* [then](#then)
-* [queueClearText](#queueClearText)
-* [changeOps](#changeOps)
-* [removeCursor](#removeCursor)
-* [addCursor](#addCursor)
-* [changeTypeColor](#changeTypeColor)
-* [changeCursorColor](#changeCursorColor)
-* [changeTypeClass](#changeTypeClass)
-* [changeCursorClass](#changeCursorClass)
+* [then](#then-callback)
+* [queueClearText](#queuecleartext)
+* [changeOps](#changeops-options)
+* [removeCursor](#removecursor)
+* [addCursor](#addcursor)
+* [changeTypeColor](#changetypecolor-color)
+* [changeCursorColor](#changecursorcolor-color)
+* [changeTypeClass](#changetypeclass-classname)
+* [changeCursorClass](#changecursorclass-classname)
 
 Other:
 * [start](#start)
-* [clearText](#clearText)
-* [clearQueue](#clearQueue)
+* [clearText](#cleartext)
+* [clearQueue](#clearqueue)
 
 ### type (str)
 
@@ -124,7 +124,7 @@ The writer will type out the first string, then rest for `interval` amount of ti
 
 Clear out the writer by deleting each character.  
 
-This differs from [clearText](#clearText) and [queueClearText](#queueClearText).  `clear` will delete characters one by one, according to the `deleteSpeed` specified.
+This differs from [clearText](#cleartext) and [queueClearText](#queuecleartext).  `clear` will delete characters one by one, according to the `deleteSpeed` specified.
 
 ### then (callback)
 
@@ -134,7 +134,7 @@ Invoke the specified callback.
 
 ### queueClearText
 
-Will queue the `clearText` action.  This differs from [clearText](#clearText) and [clear](#clear).  `queueClearText` will clear the text of the writer **instantly**, at the specified point in the queue.
+Will queue the `clearText` action.  This differs from [clearText](#cleartext) and [clear](#clear).  `queueClearText` will clear the text of the writer **instantly**, at the specified point in the queue.
 
 `queueClearText` is the only way to clear the text of the writer instantly while it is running/looping.
 
@@ -188,7 +188,7 @@ Starts the effect.  The writer will go through it's queue of actions.
 
 Clears all text from the writer **instantly**.  This is not a queued action, therefore, it can only be called once the writer has stopped running.
 
-Since this is not a queued action, `clearText` will never run if the [loop](#loop) option is set to `true`.  Use [queueClearText](#queueClearText) if you wish to clear the writer during a loop.
+Since this is not a queued action, `clearText` will never run if the [loop](#loop) option is set to `true`.  Use [queueClearText](#queuecleartext) if you wish to clear the writer during a loop.
 
 ### clearQueue
 
@@ -226,21 +226,21 @@ Explanation of each option follows:
 
 general
 * [loop](#loop)
-* [animateCursor](#animateCursor)
+* [animateCursor](#animatecursor)
 speeds
-* [blinkSpeed](#blinkSpeed)
-* [typeSpeed](#typeSpeed)
-* [deleteSpeed](#deleteSpeed)
-* [typeSpeedMin](#typeSpeedMin)
-* [typeSpeedMax](#typeSpeedMax)
-* [deleteSpeedMin](#deleteSpeedMin)
-* [deleteSpeedMax](#deleteSpeedMax)
+* [blinkSpeed](#blinkspeed)
+* [typeSpeed](#typespeed)
+* [deleteSpeed](#deletespeed)
+* [typeSpeedMin](#typespeedmin)
+* [typeSpeedMax](#typespeedmax)
+* [deleteSpeedMin](#deletespeedmin)
+* [deleteSpeedMax](#deletespeedmax)
 classes
-* [typeClass](#typeClass)
-* [cursorClass](#cursorClass)
+* [typeClass](#typeclass)
+* [cursorClass](#cursorclass)
 colors
-* [typeColor](#typeColor)
-* [cursorColor](#cursorColor)
+* [typeColor](#typecolor)
+* [cursorColor](#cursorcolor)
 
 ### loop
 
@@ -254,7 +254,7 @@ Accepts a `boolean`.
 Accepts either a `boolean`, or a string of `"none"`.
 
 * `boolean`
-  * `true` -> cursor blinks (according to [blinkSpeed](#blinkSpeed))
+  * `true` -> cursor blinks (according to [blinkSpeed](#blinkspeed))
   * `false` -> cursor does not blink
 
 * `string`
@@ -273,7 +273,7 @@ Accepts either an `integer`, or a string of `"random"`.
 * `integer`
   * The time between typing a letter and typing the next, given in milliseconds.  **A lower integer results in a faster type speed.**
 * `string`
-  * `"random"` -> constantly re-evaluates the speed based on the [typeSpeedMin](#typeSpeedMin) and [typeSpeedMax](#typeSpeedMax).  Used for a more 'human' typing effect.
+  * `"random"` -> constantly re-evaluates the speed based on the [typeSpeedMin](#typespeedmin) and [typeSpeedMax](#typespeedmax).  Used for a more 'human' typing effect.
 
 ### deleteSpeed
 
@@ -282,7 +282,7 @@ Accepts either an `integer`, or a string of `"random"`.
 * `integer`
   * The time between deleting a letter and deleting the next, given in milliseconds.  **A lower integer results in a faster delete speed.**
 * `string`
-  * `"random"` -> constantly re-evaluates the speed based on the [deleteSpeedMin](#deleteSpeedMin) and [deleteSpeedMax](#deleteSpeedMax).  Used for a more 'human' typing effect.
+  * `"random"` -> constantly re-evaluates the speed based on the [deleteSpeedMin](#deletespeedmin) and [deleteSpeedMax](#deletespeedmax).  Used for a more 'human' typing effect.
 
 ### typeSpeedMin
 
