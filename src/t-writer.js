@@ -151,7 +151,7 @@ class Typewriter {
   clearQueue() {
     this.queue = []
     this.text = ''
-    render()
+    this.render()
 
     return this
   }
